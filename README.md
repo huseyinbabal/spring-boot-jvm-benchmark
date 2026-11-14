@@ -3,8 +3,6 @@
 The same Spring Boot jar on five Java 25 JVMs, under the same load on the same server, with default settings:
 Eclipse Temurin, Amazon Corretto, Azul Zulu, IBM Semeru (OpenJ9) and GraalVM Community (JIT mode).
 
-- Video (English): https://youtu.be/FEQ5NI8Jh0g
-- Video (Turkish): https://youtu.be/GGh1cNJR7H4
 - Article with all results: https://huseyinbabal.dev/posts/spring-boot-five-jvms-benchmark/
 
 ## What's here
