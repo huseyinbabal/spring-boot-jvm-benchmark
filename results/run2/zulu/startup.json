@@ -1,0 +1,7 @@
+{
+  "jvm": "zulu",
+  "first_ok_ms": 15429,
+  "spring_started_s": 12.343,
+  "version": "OpenJDK Runtime Environment Zulu25.38+109-CA (build 25.0.5.0.3+1-LTS)",
+  "image": "629MB"
+}

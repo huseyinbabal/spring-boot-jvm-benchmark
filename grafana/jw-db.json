@@ -1,0 +1,1650 @@
+{
+ "uid": "jw-db",
+ "title": "JVM test: Postgres and machines",
+ "timezone": "utc",
+ "schemaVersion": 39,
+ "refresh": "1s",
+ "time": {
+  "from": "now-5m",
+  "to": "now"
+ },
+ "timepicker": {
+  "refresh_intervals": [
+   "1s",
+   "5s"
+  ]
+ },
+ "panels": [
+  {
+   "type": "stat",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "fixed",
+      "fixedColor": "#E6E6E6"
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "colorMode": "value",
+    "graphMode": "none",
+    "textMode": "value_and_name",
+    "justifyMode": "center"
+   },
+   "id": 1,
+   "title": "Postgres transactions / s",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(rate(pg_stat_database_xact_commit{datname=\"notes\"}[5s])) * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 0,
+    "y": 0,
+    "w": 8,
+    "h": 3
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "stat",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percent",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "fixed",
+      "fixedColor": "#E6E6E6"
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "colorMode": "value",
+    "graphMode": "none",
+    "textMode": "value_and_name",
+    "justifyMode": "center"
+   },
+   "id": 2,
+   "title": "Postgres CPU",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "(1 - avg(rate(node_cpu_seconds_total{job=\"db-node\",mode=\"idle\"}[5s]))) * 100 * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 8,
+    "y": 0,
+    "w": 8,
+    "h": 3
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "stat",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percent",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "fixed",
+      "fixedColor": "#E6E6E6"
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "colorMode": "value",
+    "graphMode": "none",
+    "textMode": "value_and_name",
+    "justifyMode": "center"
+   },
+   "id": 3,
+   "title": "app machine CPU",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "(1 - avg(rate(node_cpu_seconds_total{job=\"app-node\",mode=\"idle\"}[5s]))) * 100 * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 16,
+    "y": 0,
+    "w": 8,
+    "h": 3
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 4,
+   "title": "Postgres transactions per second",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(rate(pg_stat_database_xact_commit{datname=\"notes\"}[5s])) * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 0,
+    "y": 3,
+    "w": 12,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 5,
+   "title": "Postgres connections: total solid, busy dashed",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(pg_stat_activity_count{datname=\"notes\"}) * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}} total"
+    },
+    {
+     "refId": "B",
+     "expr": "sum(pg_stat_activity_count{datname=\"notes\",state=\"active\"}) * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}} busy"
+    }
+   ],
+   "gridPos": {
+    "x": 12,
+    "y": 3,
+    "w": 12,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 6,
+   "title": "rows read per second",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(rate(pg_stat_database_tup_fetched{datname=\"notes\"}[5s])) * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 0,
+    "y": 11,
+    "w": 8,
+    "h": 7
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 7,
+   "title": "rows written per second (insert + update)",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "(sum(rate(pg_stat_database_tup_inserted{datname=\"notes\"}[5s])) + sum(rate(pg_stat_database_tup_updated{datname=\"notes\"}[5s]))) * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 8,
+    "y": 11,
+    "w": 8,
+    "h": 7
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percent",
+     "min": 0,
+     "decimals": 1,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 8,
+   "title": "Postgres cache hit %",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "sum(rate(pg_stat_database_blks_hit{datname=\"notes\"}[5s])) / (sum(rate(pg_stat_database_blks_hit{datname=\"notes\"}[5s])) + sum(rate(pg_stat_database_blks_read{datname=\"notes\"}[5s]))) * 100 * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 16,
+    "y": 11,
+    "w": 8,
+    "h": 7
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percent",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     },
+     "max": 100
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 9,
+   "title": "Postgres machine CPU (4 vCPU)",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "(1 - avg(rate(node_cpu_seconds_total{job=\"db-node\",mode=\"idle\"}[5s]))) * 100 * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 0,
+    "y": 18,
+    "w": 8,
+    "h": 7
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percent",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     },
+     "max": 100
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 10,
+   "title": "app machine CPU (2 vCPU)",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "(1 - avg(rate(node_cpu_seconds_total{job=\"app-node\",mode=\"idle\"}[5s]))) * 100 * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 8,
+    "y": 18,
+    "w": 8,
+    "h": 7
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  },
+  {
+   "type": "timeseries",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "min": 0,
+     "decimals": 0,
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "lineWidth": 3,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": false,
+      "insertNulls": 60000,
+      "axisSoftMin": 0
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^temurin( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FF8A4C"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^corretto( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#FFD43B"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^semeru( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#4DABF7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^zulu( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#63E6BE"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": "^graalvm( .*)?$"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#E599F7"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byRegexp",
+       "options": ".* (p95|heap|pending|busy)$"
+      },
+      "properties": [
+       {
+        "id": "custom.lineStyle",
+        "value": {
+         "fill": "dash",
+         "dash": [
+          10,
+          8
+         ]
+        }
+       },
+       {
+        "id": "custom.fillOpacity",
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "legend": {
+     "showLegend": true,
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "none"
+    }
+   },
+   "id": 11,
+   "title": "app machine memory used",
+   "targets": [
+    {
+     "refId": "A",
+     "expr": "(node_memory_MemTotal_bytes{job=\"app-node\"} - node_memory_MemAvailable_bytes{job=\"app-node\"}) * on() group_left(jvm) jw_phase{jvm!=\"none\"}",
+     "legendFormat": "{{jvm}}"
+    }
+   ],
+   "gridPos": {
+    "x": 16,
+    "y": 18,
+    "w": 8,
+    "h": 7
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   }
+  }
+ ],
+ "templating": {
+  "list": []
+ }
+}

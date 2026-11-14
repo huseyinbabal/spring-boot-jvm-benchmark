@@ -1,0 +1,7 @@
+{
+  "jvm": "graalvm",
+  "first_ok_ms": 16240,
+  "spring_started_s": 12.894,
+  "version": "OpenJDK Runtime Environment GraalVM CE 25.5.5.0.3+1.1 (build 25.0.5.0.3+1-jvmci-25.5-b26)",
+  "image": "1.16GB"
+}

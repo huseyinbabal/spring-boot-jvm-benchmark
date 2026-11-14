@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: notes
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/notes}
+    username: ${DB_USER:notes}
+    password: ${DB_PASSWORD:notes}
+    hikari:
+      maximum-pool-size: 20
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+server:
+  port: 8080
+management:
+  server:
+    port: 9091
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    tags:
+      jvm: ${JVM_NAME:unknown}

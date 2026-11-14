@@ -1,0 +1,7 @@
+{
+  "jvm": "corretto",
+  "first_ok_ms": 15161,
+  "spring_started_s": 11.985,
+  "version": "OpenJDK Runtime Environment Corretto-25.0.5.0.10 (build 25.0.5+10-LTS)",
+  "image": "729MB"
+}

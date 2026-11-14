@@ -1,0 +1,5 @@
+temurin  eclipse-temurin:25.0.5_8-jre-noble
+corretto amazoncorretto:25.0.5-al2023-headless
+semeru   ibm-semeru-runtimes:open-jdk-25.0.5.0-jre-noble
+zulu     azul/zulu-openjdk:25.0.5.0.3-jre-headless
+graalvm  ghcr.io/graalvm/jdk-community:25i5-25.0.5.0.3-ol10

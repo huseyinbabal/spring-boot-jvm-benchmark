@@ -1,0 +1,7 @@
+{
+  "jvm": "temurin",
+  "first_ok_ms": 15728,
+  "spring_started_s": 12.421,
+  "version": "OpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)",
+  "image": "541MB"
+}

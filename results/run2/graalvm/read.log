@@ -1,0 +1,30 @@
+time="2026-11-12T01:52:46Z" level=warning msg="Legacy env var detected, use --features or K6_FEATURES instead" env=K6_PROMETHEUS_RW_TREND_AS_NATIVE_HISTOGRAM feature=native-histograms lifecycle=deprecated_alias source=env_legacy_alias
+time="2026-11-12T01:52:46Z" level=info msg="Experimental feature enabled" feature=native-histograms lifecycle=experimental
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 1114200 1856.917236/s
+    checks_succeeded...: 100.00% 1114200 out of 1114200
+    checks_failed......: 0.00%   0 out of 1114200
+
+    ✓ ok
+
+    HTTP
+    http_req_duration..............: avg=53.74ms p(50)=26.26ms p(95)=172.73ms p(99)=268.37ms max=1.19s
+      { expected_response:true }...: avg=53.74ms p(50)=26.26ms p(95)=172.73ms p(99)=268.37ms max=1.19s
+    http_req_failed................: 0.00%   0 out of 1114200
+    http_reqs......................: 1114200 1856.917236/s
+
+    EXECUTION
+    iteration_duration.............: avg=53.83ms p(50)=26.37ms p(95)=172.83ms p(99)=268.5ms  max=1.19s
+    iterations.....................: 1114200 1856.917236/s
+    vus............................: 100     min=100          max=100
+    vus_max........................: 100     min=100          max=100
+
+    NETWORK
+    data_received..................: 2.0 GB  3.4 MB/s
+    data_sent......................: 93 MB   155 kB/s
+
+
+
